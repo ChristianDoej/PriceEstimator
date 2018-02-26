@@ -1,4 +1,4 @@
-# IMHO
+# PriceEstimator
 ### Menu
 [ER-diagram](https://github.com/Distribuerede-Systemer-2017/IMHO-2/blob/master/documents/ER-diagram.png)
 | [Flowchart](https://github.com/Distribuerede-Systemer-2017/IMHO-2/blob/master/documents/Flowchart_examQuiz.png)
