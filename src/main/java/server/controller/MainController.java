@@ -18,6 +18,8 @@ public class MainController {
     private Digester digester;
 
 
+    // Virker det her?
+
     //The constructor for instantiation
     public MainController() {
         digester = new Digester();
