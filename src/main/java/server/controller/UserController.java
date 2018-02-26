@@ -12,6 +12,7 @@ public class UserController {
 
     }
 
+        //VIRKER DET EHERERER?
 
     //Method for calculating result
     public Result getResult(int quizId, int userId) {
