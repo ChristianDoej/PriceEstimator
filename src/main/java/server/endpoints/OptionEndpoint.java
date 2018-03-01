@@ -52,10 +52,13 @@ public class OptionEndpoint {
     @POST
     //Creating a new option for a quiz.
     public Response createOption(@HeaderParam("authorization") String token, String option) throws SQLException {
+        String cryptedOption = crypter.encryptAndDecryptXor(option);
         CurrentUserContext currentUser = tokenController.getUserFromTokens(token);
 
+
+
         if (currentUser.getCurrentUser() != null && currentUser.isAdmin()) {
-            Option optionCreated = quizController.createOption(new Gson().fromJson(option, Option.class));
+            Option optionCreated = quizController.createOption(new Gson().fromJson(cryptedOption, Option.class));
             String newOption = new Gson().toJson(optionCreated);
             newOption = crypter.encryptAndDecryptXor(newOption);
 
@@ -64,7 +67,8 @@ public class OptionEndpoint {
                 return Response.status(200).type("application/json").entity(new Gson().toJson(newOption)).build();
             } else {
                 Globals.log.writeLog(this.getClass().getName(), this, "No input to new option", 2);
-                return Response.status(500).type("text/plain").entity("Failed creating option").build();
+                //Ændret så options kan hedde det samme
+                return Response.status(500).type("application/json").entity("Failed creating option").build();
             }
         } else {
             Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - create option", 2);

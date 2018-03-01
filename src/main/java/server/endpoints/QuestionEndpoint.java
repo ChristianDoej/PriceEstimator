@@ -48,10 +48,11 @@ public class QuestionEndpoint {
     @POST
     //Method for creating a question
     public Response createQuestion(@HeaderParam("authorization") String token, String question) throws SQLException {
+        String cryptedQuestion = crypter.encryptAndDecryptXor(question);
         CurrentUserContext currentUser = tokenController.getUserFromTokens(token);
 
         if (currentUser.getCurrentUser() != null && currentUser.isAdmin()) {
-            Question questionCreated = quizController.createQuestion(new Gson().fromJson(question, Question.class));
+            Question questionCreated = quizController.createQuestion(new Gson().fromJson(cryptedQuestion, Question.class));
             String newQuestion = new Gson().toJson(questionCreated);
             newQuestion = crypter.encryptAndDecryptXor(newQuestion);
 

@@ -8,7 +8,7 @@ public class Answer {
 
     public Answer(int answerId, int answerResult, int answerToOptionId) {
         this.answerId = answerId;
-        this.answerResult = answerResult;
+        this.answerResult = answerResult; //Bruger jeg som quizId
         this.answerToOptionId = answerToOptionId;
     }
 

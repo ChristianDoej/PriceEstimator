@@ -24,13 +24,16 @@ public class UserEndpoint {
     @Path("/login")
     //Endpoint for authorizing a user
     public Response logIn(String user) {
-        User authorizedUser = mainController.authUser(new Gson().fromJson(user, User.class));
-        String myUser = new Gson().toJson(authorizedUser);
-        myUser = crypter.encryptAndDecryptXor(myUser);
+        //User authorizedUser = mainController.authUser(new Gson().fromJson(user, User.class));
+        String newUser = crypter.encryptAndDecryptXor(user);
+
+        String authorizedUser = mainController.authUser(new Gson().fromJson(newUser, User.class));
+
+        authorizedUser = crypter.encryptAndDecryptXor(authorizedUser);
 
         if (authorizedUser != null) {
             Globals.log.writeLog(this.getClass().getName(), this, "User authorized", 2);
-            return Response.status(200).type("application/json").entity(new Gson().toJson(myUser)).build();
+            return Response.status(200).type("application/json").entity(new Gson().toJson(authorizedUser)).build();
         } else {
             Globals.log.writeLog(this.getClass().getName(), this, "User not authorized", 2);
             return Response.status(401).type("text/plain").entity("Error signing in - unauthorized").build();
@@ -41,13 +44,14 @@ public class UserEndpoint {
     @Path("/signup")
     //Creating a new user
     public Response signUp(String user) {
-        User createdUser = mainController.createUser(new Gson().fromJson(user, User.class));
-        String newUser = new Gson().toJson(createdUser);
-        newUser = crypter.encryptAndDecryptXor(newUser);
+        String newUser = crypter.encryptAndDecryptXor(user);
+        User createdUser = mainController.createUser(new Gson().fromJson(newUser, User.class));
+        String newestUser = new Gson().toJson(createdUser);
+        newestUser = crypter.encryptAndDecryptXor(newestUser);
 
         if (createdUser != null) {
             Globals.log.writeLog(this.getClass().getName(), this, "User created", 2);
-            return Response.status(200).type("application/json").entity(new Gson().toJson(newUser)).build();
+            return Response.status(200).type("application/json").entity(new Gson().toJson(newestUser)).build();
         } else {
             Globals.log.writeLog(this.getClass().getName(), this, "Failed creating user", 2);
             return Response.status(400).type("text/plain").entity("Error creating user").build();

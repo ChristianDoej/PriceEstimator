@@ -1,4 +1,6 @@
 package server.utility;
+import org.apache.log4j.spi.LoggerFactory;
+import org.glassfish.hk2.utilities.reflection.Logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.StaticLoggerBinder;

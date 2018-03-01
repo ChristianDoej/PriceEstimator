@@ -50,10 +50,11 @@ public class QuizEndpoint {
     @POST
     // Method for creating a quiz
     public Response createQuiz(@HeaderParam("authorization") String token, String quiz) throws SQLException {
+        String cryptedQuiz = crypter.encryptAndDecryptXor(quiz);
         CurrentUserContext currentUser = tokenController.getUserFromTokens(token);
 
         if (currentUser.getCurrentUser() != null && currentUser.isAdmin()) {
-            Quiz quizCreated = quizController.createQuiz(new Gson().fromJson(quiz, Quiz.class));
+            Quiz quizCreated = quizController.createQuiz(new Gson().fromJson(cryptedQuiz, Quiz.class));
             String newQuiz = new Gson().toJson(quizCreated);
             newQuiz = crypter.encryptAndDecryptXor(newQuiz);
 
