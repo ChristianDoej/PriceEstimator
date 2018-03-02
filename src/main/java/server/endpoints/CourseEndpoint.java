@@ -30,14 +30,11 @@ public class CourseEndpoint {
             loadedCourses = crypter.encryptAndDecryptXor(loadedCourses);
 
             if (courses != null) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Courses loaded", 2);
                 return Response.status(200).type("application/json").entity(new Gson().toJson(loadedCourses)).build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "Empty course array loaded", 2);
                 return Response.status(204).type("text/plain").entity("No courses").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - load course", 2);
             return Response.status(401).type("text/plain").entity("Unauthorized").build();
         }
     }

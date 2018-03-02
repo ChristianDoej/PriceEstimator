@@ -35,14 +35,11 @@ public class QuizEndpoint {
             loadedQuizzes = crypter.encryptAndDecryptXor(loadedQuizzes);
 
             if (quizzes != null) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Quizzes loaded", 2);
                 return Response.status(200).type("application/json").entity(new Gson().toJson(loadedQuizzes)).build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "Empty quiz array loaded", 2);
                 return Response.status(204).type("text/plain").entity("No quizzes").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - load quiz", 2);
             return Response.status(401).type("text/plain").entity("Unauthorized").build();
         }
     }
@@ -59,14 +56,11 @@ public class QuizEndpoint {
             newQuiz = crypter.encryptAndDecryptXor(newQuiz);
 
             if (quizCreated != null) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Quiz created", 2);
                 return Response.status(200).type("application/json").entity(new Gson().toJson(newQuiz)).build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "No input to new quiz", 2);
                 return Response.status(400).type("text/plain").entity("Failed creating quiz").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - create quiz", 2);
             return Response.status(401).type("text/plain").entity("Unauthorized").build();
         }
     }
@@ -81,14 +75,11 @@ public class QuizEndpoint {
         if (currentUser.getCurrentUser() != null && currentUser.isAdmin()) {
             Boolean quizDeleted = quizController.deleteQuiz(quizId);
             if (quizDeleted = true) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Quiz deleted", 2);
                 return Response.status(200).type("text/plain").entity("Quiz deleted").build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "Delete quiz attempt failed", 2);
                 return Response.status(400).type("text/plain").entity("Error deleting quiz").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - delete quiz", 2);
             return Response.status(401).type("text/plain").entity("Unauthorized").build();
         }
     }

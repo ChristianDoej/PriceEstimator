@@ -32,10 +32,8 @@ public class UserEndpoint {
         authorizedUser = crypter.encryptAndDecryptXor(authorizedUser);
 
         if (authorizedUser != null) {
-            Globals.log.writeLog(this.getClass().getName(), this, "User authorized", 2);
             return Response.status(200).type("application/json").entity(new Gson().toJson(authorizedUser)).build();
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "User not authorized", 2);
             return Response.status(401).type("text/plain").entity("Error signing in - unauthorized").build();
         }
     }
@@ -50,10 +48,8 @@ public class UserEndpoint {
         newestUser = crypter.encryptAndDecryptXor(newestUser);
 
         if (createdUser != null) {
-            Globals.log.writeLog(this.getClass().getName(), this, "User created", 2);
             return Response.status(200).type("application/json").entity(new Gson().toJson(newestUser)).build();
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Failed creating user", 2);
             return Response.status(400).type("text/plain").entity("Error creating user").build();
         }
     }
@@ -68,10 +64,8 @@ public class UserEndpoint {
         myUser = crypter.encryptAndDecryptXor(myUser);
 
         if (currentUser.getCurrentUser() != null) {
-            Globals.log.writeLog(this.getClass().getName(), this, "My user loaded", 2);
             return Response.status(200).type("application/json").entity(new Gson().toJson(myUser)).build();
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - my user", 2);
             return Response.status(400).type("text/plain").entity("Error loading user").build();
         }
     }
@@ -83,10 +77,8 @@ public class UserEndpoint {
         Boolean deletedToken = tokenController.deleteToken(myUserId);
 
         if (deletedToken == true) {
-            Globals.log.writeLog(this.getClass().getName(), this, "User log out", 2);
             return Response.status(200).entity("Logged out").build();
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "User failed log out", 2);
             return Response.status(400).type("text/plain").entity("Error logging out").build();
         }
 

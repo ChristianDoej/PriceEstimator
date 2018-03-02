@@ -37,14 +37,11 @@ public class OptionEndpoint {
             loadedOptions = crypter.encryptAndDecryptXor(loadedOptions);
 
             if (options != null) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Options loaded", 2);
                 return Response.status(200).type("application/json").entity(new Gson().toJson(loadedOptions)).build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "Empty options array loaded", 2);
                 return Response.status(204).type("text/plain").entity("No options").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - load options", 2);
             return Response.status(401).type("text/plain").entity("Unauthorized").build();
         }
     }
@@ -63,15 +60,12 @@ public class OptionEndpoint {
             newOption = crypter.encryptAndDecryptXor(newOption);
 
             if (optionCreated != null) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Option created", 2);
                 return Response.status(200).type("application/json").entity(new Gson().toJson(newOption)).build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "No input to new option", 2);
                 //Ændret så options kan hedde det samme
                 return Response.status(500).type("application/json").entity("Failed creating option").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - create option", 2);
             return Response.status(500).type("text/plain").entity("Unauthorized").build();
         }
     }
@@ -84,14 +78,11 @@ public class OptionEndpoint {
         if (currentUser.getCurrentUser() != null) {
             Boolean answerDeleted = userController.deleteAnswer(userId);
             if (answerDeleted = true) {
-                Globals.log.writeLog(this.getClass().getName(), this, "Answer deleted", 2);
                 return Response.status(200).type("text/plain").entity("Answer deleted").build();
             } else {
-                Globals.log.writeLog(this.getClass().getName(), this, "Delete answer attempt failed", 2);
                 return Response.status(400).type("text/plain").entity("Error deleting answer").build();
             }
         } else {
-            Globals.log.writeLog(this.getClass().getName(), this, "Unauthorized - delete answer", 2);
             return Response.status(401).type("text/plain").entity("Unauthorized").build();
         }
     }

@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class Globals implements ServletContextListener {
 
-    public static Logging log = new Logging();
 
     public static Config config = new Config();
 
@@ -27,14 +26,12 @@ public class Globals implements ServletContextListener {
 
         //We initialize our Logger class and tells our Logging.txt that the system has been started
         System.out.println("Context is initialized");
-        log.writeLog(this.getClass().getName(), this, "We've started the system", 1);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         //Logging when the system is stopped
         System.out.println("Context is destroyed");
-        log.writeLog(this.getClass().getName(), this, "The system has been stopped", 2);
     }
 }
 
