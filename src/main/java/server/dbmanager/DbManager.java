@@ -112,6 +112,31 @@ public class DbManager {
         return null;
     }
 
+    public Event createEvent(Event event) throws IllegalArgumentException {
+        try {
+            PreparedStatement createEvent = connection
+                    .prepareStatement("INSERT INTO Event (price, profit, idUser) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            createEvent.setInt(1, event.getPrice());
+            createEvent.setInt(2, event.getProfit());
+            createEvent.setInt(3, event.getEvent_idUser());
+
+            int rowsAffected = createEvent.executeUpdate();
+            if (rowsAffected == 1) {
+                ResultSet rs = createEvent.getGeneratedKeys();
+                if (rs != null && rs.next()) {
+                    int autoIncrementIdEvent = rs.getInt(1);
+                    event.setIdEvent(autoIncrementIdEvent);
+                } else {
+                    event = null;
+                }
+                return event;
+            }
+
+        } catch (SQLException exception) {
+
+        } return null;
+    }
+
     // Method for creating a quiz
     public Quiz createQuiz(Quiz quiz) throws IllegalArgumentException {
         //Try-catch

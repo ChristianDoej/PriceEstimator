@@ -5,13 +5,13 @@ public class Event {
     private int idEvent;
     private int price;
     private int profit;
-    private int idUser;
+    private int event_idUser;
 
-    public Event(int idEvent, int price, int profit, int idUser) {
+    public Event(int idEvent, int price, int profit, int event_idUser) {
         this.idEvent = idEvent;
         this.price = price;
         this.profit = profit;
-        this.idUser = idUser;
+        this.event_idUser = event_idUser;
 
     }
 
@@ -43,13 +43,11 @@ public class Event {
         this.profit = profit;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getEvent_idUser() {
+        return event_idUser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setEvent_idUser(int event_idUser) {
+        this.event_idUser = event_idUser;
     }
-
-
 }
