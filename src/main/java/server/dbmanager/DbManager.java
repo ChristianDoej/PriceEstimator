@@ -115,10 +115,20 @@ public class DbManager {
     public Event createEvent(Event event) throws IllegalArgumentException {
         try {
             PreparedStatement createEvent = connection
-                    .prepareStatement("INSERT INTO Event (price, profit, idUser) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            createEvent.setInt(1, event.getPrice());
-            createEvent.setInt(2, event.getProfit());
-            createEvent.setInt(3, event.getEvent_idUser());
+                    .prepareStatement("INSERT INTO Event (pris, idUser, kunde, saelger, gaester, bartendere, timer, status, dag, maaned, aar)" +
+                            " VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            createEvent.setInt(1, event.getPris());
+            createEvent.setInt(2, event.getEvent_idUser());
+            createEvent.setString(3, event.getKunde());
+            createEvent.setString(4, event.getSaelger());
+            createEvent.setInt(5, event.getGaester());
+            createEvent.setInt(6, event.getBartendere());
+            createEvent.setInt(7, event.getTimer());
+            createEvent.setString(8, event.getStatus());
+            createEvent.setInt(9, event.getDag());
+            createEvent.setInt(10, event.getMaaned());
+            createEvent.setInt(11, event.getAar());
+
 
             int rowsAffected = createEvent.executeUpdate();
             if (rowsAffected == 1) {
