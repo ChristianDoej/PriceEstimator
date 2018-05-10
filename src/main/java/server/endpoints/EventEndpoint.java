@@ -34,7 +34,7 @@ public class EventEndpoint {
        // Quiz quizCreated = quizController.createQuiz(new Gson().fromJson(cryptedQuiz, Quiz.class));
        // String newQuiz = new Gson().toJson(quizCreated);
        // newQuiz = crypter.encryptAndDecryptXor(newQuiz);
-        
+
        // String cryptedEvent = crypter.encryptAndDecryptXor(event);
 
         Event eventCreated = eventController.createEvent(new Gson().fromJson(event, Event.class));
