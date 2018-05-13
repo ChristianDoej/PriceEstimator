@@ -29,8 +29,6 @@ public class EventEndpoint {
     @POST
     @Path("/create")
     public Response createEvent(String event) {
-         int k = 0;
-
        // Quiz quizCreated = quizController.createQuiz(new Gson().fromJson(cryptedQuiz, Quiz.class));
        // String newQuiz = new Gson().toJson(quizCreated);
        // newQuiz = crypter.encryptAndDecryptXor(newQuiz);

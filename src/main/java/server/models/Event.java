@@ -17,11 +17,11 @@ public class Event {
 
 
 
-    public Event(int idEvent, int pris, int event_idUser, String kunde, String saelger,
+    public Event(int idEvent, int event_idUser, int pris, String kunde, String saelger,
                  int gaester, int bartendere, int timer, String status, int dag, int maaned, int aar) {
         this.idEvent = idEvent;
-        this.pris = pris;
         this.event_idUser = event_idUser;
+        this.pris = pris;
         this.kunde = kunde;
         this.saelger = saelger;
         this.gaester = gaester;
